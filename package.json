@@ -6,8 +6,7 @@
   "dependencies": {
     "btoa": "^1.2.1",
     "express": "^4.17.1",
-    "node-fetch": "^2.6.1",
-    "vue": "^2.6.12"
+    "node-fetch": "^2.6.1"
   },
   "devDependencies": {},
   "scripts": {

@@ -1,7 +1,6 @@
 const express = require('express');
 const fetch = require('node-fetch');
-const btoa = require('btoa');
-const { catchAsync } = require('../utils');
+const { catchAsync, encodeFormData } = require('../utils/utils');
 
 const router = express.Router();
 
@@ -9,12 +8,6 @@ const CLIENT_ID = "691589447074054224";
 const CLIENT_SECRET = "Rs66DQq7lIinWQO6soilX_CrzullCMX3";
 const redirect = 'http://localhost:50451/api/discord/callback';
 
-const encodeFormData = (data) => {
-    return Object.keys(data)
-        .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-        .join('&');
-
-}
 
 
 router.get('/login', (req, res) => {
@@ -43,7 +36,7 @@ router.get('/callback', catchAsync(async (req, res) => {
       });
       console.log(response)
     const json = await response.json();
-    sessionStorage.setItem("token", json.access_token);
+    window.sessionStorage.setItem("token", json.access_token);
     res.redirect("/");
   }));
 

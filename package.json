@@ -1,0 +1,27 @@
+{
+  "name": "obsidion-dashboard",
+  "version": "0.0.0",
+  "description": "A web dashboard for the Minecraft Discord Bot Obsidion. ",
+  "main": "server.js",
+  "dependencies": {
+    "btoa": "^1.2.1",
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.1",
+    "vue": "^2.6.12"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Obsidion-dev/Obsidion-Dashboard.git"
+  },
+  "author": "Leon Bowie and Arrow Quirk",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Obsidion-dev/Obsidion-Dashboard/issues"
+  },
+  "homepage": "https://github.com/Obsidion-dev/Obsidion-Dashboard#readme"
+}

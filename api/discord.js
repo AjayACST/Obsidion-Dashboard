@@ -11,7 +11,7 @@ const redirect = 'http://localhost:50451/api/discord/callback';
 
 
 router.get('/login', (req, res) => {
-  res.redirect(`https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${redirect}&response_type=code&scope=identify%20email%20connections%20guilds`);
+  res.redirect(`https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${redirect}&response_type=code&scope=identify`);
 });
 
 router.get('/callback', catchAsync(async (req, res) => {
@@ -23,7 +23,7 @@ router.get('/callback', catchAsync(async (req, res) => {
         'grant_type': 'authorization_code',
         'code': code,
         'redirect_uri': redirect,
-        'scope': 'identify email connections guilds'
+        'scope': 'identify'
       }
     const response = await fetch(`https://discord.com/api/v6/oauth2/token`,
       {

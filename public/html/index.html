@@ -31,21 +31,40 @@
         <div class="container">
           <a href="/api/discord/login">Login through discord</a>
         </div>
-        <div id="username">
-          {{ username }}
+        <div id="message">
+          {{ token }}
         </div>
+        <img v-bind:src="'https://cdn.discordapp.com/avatars/' + imgURL"/>
 
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
 
         <script>
           const cookies = new UniversalCookie();
 
+          var token = cookies.get('token');
+
+
           var app = new Vue({
-            el: '#username',
-            data: {
-              message: cookies.get('token')
+            el: '#message',
+            data () {
+              return {
+                token: null,
+                imgURL: null
+              }
+            },
+            mounted () {
+              fetch('http://discordapp.com/api/users/@me', {method: "GET", headers: { 'Authorization': `Bearer ${token}` }})
+              .then(response => response.json())
+              .then((discordResponse) => {
+                this.token = discordResponse;
+                this.imgURL = `${discordResponse.id}/${discordResponse.avatar}.png`
+              });
             }
           })
+
+          
+
+          
         </script>
 
         

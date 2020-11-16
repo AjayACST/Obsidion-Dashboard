@@ -17,7 +17,6 @@ router.get('/login', (req, res) => {
 router.get('/callback', catchAsync(async (req, res) => {
     if (!req.query.code) throw new Error('NoCodeProvided');
     const code = req.query.code;
-    console.log(code)
     const data = {
         'client_id': CLIENT_ID,
         'client_secret': CLIENT_SECRET,
@@ -34,9 +33,11 @@ router.get('/callback', catchAsync(async (req, res) => {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
       });
-      console.log(response)
     const json = await response.json();
-    window.sessionStorage.setItem("token", json.access_token);
+    res.cookie('token', json.access_token, {
+      maxAge: json.expires_in,
+      httpOnly: false
+    });
     res.redirect("/");
   }));
 

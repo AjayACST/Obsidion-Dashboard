@@ -18,20 +18,25 @@
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item minecraft-font">
-                  <a class="nav-link navbar-color" href="/dashboard">Dashboard</a>
+                  <a class="nav-link navbar-color" href="/">Home</a>
+                </li>
+                <li class="nav-item minecraft-font">
+                  <a class="nav-link navbar-color" href="/dashboard/prefix">Prefix</a>
+                </li>
+                <li class="nav-item minecraft-font">
+                  <a class="nav-link navbar-color" href="/dashboard/server">Linked Server</a>
+                </li>
+                <li class="nav-item minecraft-font">
+                  <a class="nav-link navbar-color" href="/dashboard/account">Linked Account</a>
+                </li>
+                <li class="nav-item minecraft-font">
+                  <a class="nav-link navbar-color" href="/dashboard/rcon">RCON</a>
                 </li>
               </ul>
             
               <span class="navbar-text" style="color: white;">
-                <div id="discord-login">
-                  <span v-if="notlogin">
-                    <a href="/api/discord/login" style="color: white; font-size: 20px;" class="minecraft-font">Login with<img style="max-width: auto; max-height: 30px; vertical-align: -25%" src="/img/Discord-Wordmark-Color.png"></a>
-                  </span>
-                </div>
                 <div id="header">
-                  <span v-if="loggedin">
-                    <a href="/dashboard" style="color: white; font-size: 20px;" class="minecraft-font">{{ username }} <img style="max-width: auto; max-height: 50px; vertical-align: -50%; border-radius: 50%;" v-bind:src="imgURL"></a>
-                  </span>
+                  <a href="/dashboard" style="color: white; font-size: 20px;" class="minecraft-font">{{ username }}<img style="max-width: auto; max-height: 50px; vertical-align: -60%; border-radius: 50%;" v-bind:src="imgURL"></a>
                 </div>
               </span>
             </div>

@@ -1,12 +1,14 @@
 const cookieParser = require('cookie-parser');
+const { static } = require('express');
 const express = require('express');
 const path = require('path');
 
 const app = express();
 
-app.get('/', (req, res) => {
-  res.status(200).sendFile(path.join(__dirname, 'public/html/index.html'));
-});
+app.use(express.static(__dirname + '/public'));
+
+app.use(express.static(__dirname + '/public/dashboard'));
+
 
 app.use('/api/discord', require('./api/discord'));
 

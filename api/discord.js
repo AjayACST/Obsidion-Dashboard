@@ -35,7 +35,11 @@ router.get('/callback', catchAsync(async (req, res) => {
       });
     const json = await response.json();
     res.cookie('token', json.access_token, {
-      maxAge: json.expires_in,
+      maxAge: 604800000,
+      httpOnly: false
+    });
+    res.cookie('loggedin', true, {
+      maxAge: 604800000,
       httpOnly: false
     });
     res.redirect("/");

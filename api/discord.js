@@ -23,7 +23,7 @@ db.serialize(() => {
 })
 
 router.get('/login', (req, res) => {
-  res.redirect(`https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${redirect}&response_type=code&scope=identify`);
+  res.redirect(`https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${redirect}&response_type=code&scope=identify guilds`);
 });
 
 router.get('/callback', catchAsync(async (req, res) => {
@@ -35,7 +35,7 @@ router.get('/callback', catchAsync(async (req, res) => {
         'grant_type': 'authorization_code',
         'code': code,
         'redirect_uri': redirect,
-        'scope': 'identify'
+        'scope': 'identify guilds'
       }
     const response = await fetch(`https://discord.com/api/v6/oauth2/token`,
       {

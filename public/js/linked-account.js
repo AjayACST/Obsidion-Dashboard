@@ -28,7 +28,7 @@ var accountUsername = {
                         this.message = false;
                         this.messageText = null;
                         this.usernameUpdate = null;
-                    }, 000)
+                    }, 3000)
             } else {
                 this.username = `Your account is currently linked to: ${apiResponse.username}`;
             }
@@ -46,7 +46,7 @@ var accountUsername = {
                         this.message = false;
                         this.messageText = null;
                         this.usernameUpdate = null;
-                    }, 2000)
+                    }, 3000)
                 } else if (apiResponse.code === 401) {
                     this.messageText = "Sorry, you are not authorized to do that."
                     this.message = true;
@@ -54,7 +54,7 @@ var accountUsername = {
                         this.message = false;
                         this.messageText = null;
                         this.usernameUpdate = null;
-                    }, 2000)
+                    }, 3000)
                 } else {
                     this.messageText = `Successfully updated your linked account to ${this.usernameUpdate}!`
                     this.message = true;
@@ -63,7 +63,7 @@ var accountUsername = {
                         this.message = false;
                         this.messageText = null;
                         this.usernameUpdate = null;
-                    }, 2000)
+                    }, 3000)
                 }
             });
         }

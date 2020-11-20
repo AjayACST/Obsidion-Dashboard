@@ -1,4 +1,5 @@
-const cookies = new UniversalCookie();
+
+
 
 if (!cookies.get('loggedin')) {
     cookies.set("error", "You need to be logged in to do that.", {maxAge: 2, path: "/"});
@@ -16,3 +17,4 @@ const header = {
 };
 
 Vue.createApp(header).mount("#header")
+

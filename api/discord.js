@@ -1,14 +1,20 @@
 const express = require('express');
 const fetch = require('node-fetch');
 const { catchAsync, encodeFormData } = require('../utils/utils');
+const sqlite = require('sqlite3');
+const SHA512 = require('crypto-js/sha512')
 
 const router = express.Router();
 
 const CLIENT_ID = "691589447074054224";
 const CLIENT_SECRET = "Rs66DQq7lIinWQO6soilX_CrzullCMX3";
 const redirect = 'http://localhost:50451/api/discord/callback';
+const db = new sqlite.Database('./database/api-auth.db');
 
 
+db.serialize(() => {
+  db.run("CREATE TABLE IF NOT EXISTS auth ( token varchar(255) NOT NULL);");
+})
 
 router.get('/login', (req, res) => {
   res.redirect(`https://discord.com/api/oauth2/authorize?client_id=${CLIENT_ID}&redirect_uri=${redirect}&response_type=code&scope=identify`);
@@ -33,15 +39,28 @@ router.get('/callback', catchAsync(async (req, res) => {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
       });
+
+    //set discord token in cookies to use later
     const json = await response.json();
     res.cookie('token', json.access_token, {
       maxAge: 604800000,
       httpOnly: false
     });
+
+    //set logged in cookie to true so we know not to redirect away from dashboard.
     res.cookie('loggedin', true, {
       maxAge: 604800000,
       httpOnly: false
     });
+
+    //generate a MD5 hash for use with database API and store in cookies and DB
+    var dbToken = SHA512(json.access_token);
+    res.cookie('dbToken', `${dbToken}`, {
+      httpOnly: false
+    });
+
+    db.run(`INSERT INTO auth (token) VALUES ('${dbToken}');`);
+
     res.redirect("/");
   }));
 

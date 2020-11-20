@@ -11,6 +11,7 @@ app.use(express.static(__dirname + '/public/dashboard'));
 
 
 app.use('/api/discord', require('./api/discord'));
+app.use('/api/database', require('./api/database'));
 
 app.use((err, req, res, next) => {
     switch (err.message) {
@@ -28,6 +29,8 @@ app.use((err, req, res, next) => {
   });
 
 app.use(cookieParser());
+
+
 
 app.listen(50451, () => {
   console.info('Running on port 50451');

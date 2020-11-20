@@ -1,0 +1,13 @@
+app:
+  CLIENT_ID: "App Client ID"
+  CLIENT_SECRET: "App Client Secret"
+  redirect: "http://localhost:50451/api/discord/callback"
+
+db:
+  user: "discord"
+  host: "localhost"
+  database: "discord"
+  password: "superstrongpassword"
+  port: "5432"
+
+sql: "./database/api-auth.db"

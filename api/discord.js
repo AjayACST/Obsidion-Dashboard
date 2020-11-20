@@ -2,14 +2,20 @@ const express = require('express');
 const fetch = require('node-fetch');
 const { catchAsync, encodeFormData } = require('../utils/utils');
 const sqlite = require('sqlite3');
-const SHA512 = require('crypto-js/sha512')
+const SHA512 = require('crypto-js/sha512');
+const config = require('config-yml');
 
 const router = express.Router();
 
-const CLIENT_ID = "691589447074054224";
-const CLIENT_SECRET = "Rs66DQq7lIinWQO6soilX_CrzullCMX3";
-const redirect = 'http://localhost:50451/api/discord/callback';
-const db = new sqlite.Database('./database/api-auth.db');
+
+
+const CLIENT_ID = config.app.CLIENT_ID;
+const CLIENT_SECRET = config.app.CLIENT_SECRET;
+const redirect = config.app.redirect;
+const sqlpath = config.sql;
+
+
+const db = new sqlite.Database(sqlpath);
 
 
 db.serialize(() => {

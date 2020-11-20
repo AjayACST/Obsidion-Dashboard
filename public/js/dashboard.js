@@ -1,4 +1,4 @@
-
+const cookies = new UniversalCookie();
 
 
 if (!cookies.get('loggedin')) {

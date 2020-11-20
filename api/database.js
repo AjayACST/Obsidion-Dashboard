@@ -2,17 +2,28 @@ const express = require('express');
 const {catchAsync} = require('../utils/utils');
 const sqlite = require('sqlite3');
 const {Pool} = require('pg');
+const config = require('config-yml');
 
 const db = new sqlite.Database('./database/api-auth.db');
 
 const router = express.Router();
 
+
+
+const user = config.db.user;
+const host = config.db.host;
+const database = config.db.database;
+const password = config.db.password;
+const port = config.db.port;
+
+
+
 const pool = new Pool({
-    user: 'discord',
-    host: '172.21.217.127',
-    database: 'discord',
-    password: 'hunter12',
-    port: 5432
+    user: user,
+    host: host,
+    database: database,
+    password: password,
+    port: port
 })
 
 router.get('/account', (req, res) => {
@@ -36,7 +47,7 @@ router.get('/account', (req, res) => {
             if (row.token === token) {
                 pool.query(`SELECT username FROM discord_user WHERE id='${id}'`)
                 .then(response => res.json({code: 200, "username": response.rows[0].username}))
-                .catch(e => res.json({code: 404, "message": "User has not linked their account."}))
+                // .catch(e => res.json({code: 404, "message": "User has not linked their account."}))
             } else {
                 res.json({code: 401, "message": "That is not a valid token."})
             }

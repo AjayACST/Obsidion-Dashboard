@@ -14,11 +14,23 @@ var accountUsername = {
             method: "GET"
         }).then(response => response.json()).then((apiResponse) => {
             if (apiResponse.code === 404) {
-                //do stuff here
+                this.messageText = "You have not linked your account before."
+                    this.message = true;
+                    setTimeout(() => {
+                        this.message = false;
+                        this.messageText = null;
+                        this.usernameUpdate = null;
+                    }, 5000)
             } else if (apiResponse.code === 401) {
-                //do stuff here
+                this.messageText = "Sorry, you are not authorized to do that."
+                    this.message = true;
+                    setTimeout(() => {
+                        this.message = false;
+                        this.messageText = null;
+                        this.usernameUpdate = null;
+                    }, 000)
             } else {
-                this.username = apiResponse.username;
+                this.username = `Your account is currently linked to: ${apiResponse.username}`;
             }
         })
     },
@@ -28,18 +40,30 @@ var accountUsername = {
                 method: 'GET'
             }).then(response => response.json()).then((apiResponse) => {
                 if (apiResponse.code === 404){
-                    //do stuff here
-                } else if (apiResponse.code === 401) {
-                    //do stuff here
-                } else {
-                    this.messageText = `Successfully updated your linked account to ${this.usernameUpdate}!`
+                    this.messageText = "Sorry, an error has occured please try again later."
                     this.message = true;
-                    this.username = this.usernameUpdate
                     setTimeout(() => {
                         this.message = false;
                         this.messageText = null;
                         this.usernameUpdate = null;
-                    }, 5000)
+                    }, 2000)
+                } else if (apiResponse.code === 401) {
+                    this.messageText = "Sorry, you are not authorized to do that."
+                    this.message = true;
+                    setTimeout(() => {
+                        this.message = false;
+                        this.messageText = null;
+                        this.usernameUpdate = null;
+                    }, 2000)
+                } else {
+                    this.messageText = `Successfully updated your linked account to ${this.usernameUpdate}!`
+                    this.message = true;
+                    this.username = `Your account is currently linked to: ${this.usernameUpdate}`;
+                    setTimeout(() => {
+                        this.message = false;
+                        this.messageText = null;
+                        this.usernameUpdate = null;
+                    }, 2000)
                 }
             });
         }
@@ -47,3 +71,21 @@ var accountUsername = {
 }
 
 Vue.createApp(accountUsername).mount('#account');
+
+
+if (!cookies.get('loggedin')) {
+    cookies.set("error", "You need to be logged in to do that.", {maxAge: 2, path: "/"});
+    console.log(cookies.get('error'))
+    location.replace('/');
+}
+
+const header = {
+    data() {
+        return {
+            username: cookies.get('username'),
+            imgURL: cookies.get('imgurl')
+        }
+    }
+};
+
+Vue.createApp(header).mount("#header")

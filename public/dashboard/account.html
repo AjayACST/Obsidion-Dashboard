@@ -49,13 +49,12 @@
             <div v-if="message" class="alert alert-primary" role="alert">
               {{ messageText }}
             </div>
-            <h1> Your account is currently linked to: {{ username }}</h1>
+            <h1>{{ username }}</h1>
             <input type="text" id="username" name="username" v-model="usernameUpdate">
             <button @click="updateUsername">Update</button>
           </div>
 
         <script src="https://unpkg.com/vue@3.0.2/dist/vue.global.js"></script>
         <script src="../js/linked-account.js"></script>
-        <script src="../js/dashboard.js"></script>
     </body>
 </html>

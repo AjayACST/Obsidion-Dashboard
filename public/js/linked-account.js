@@ -2,7 +2,6 @@ const cookies = new UniversalCookie();
 
 if (!cookies.get('loggedin')) {
     cookies.set("error", "You need to be logged in to do that.", {maxAge: 2, path: "/"});
-    console.log(cookies.get('error'))
     location.replace('/');
 }
 
@@ -12,7 +11,8 @@ var accountUsername = {
             username: null,
             usernameUpdate: null,
             messageText: null,
-            message: false
+            message: false,
+            viewUpdate: true
         }
     },
     mounted() {
@@ -20,21 +20,11 @@ var accountUsername = {
             method: "GET"
         }).then(response => response.json()).then((apiResponse) => {
             if (apiResponse.code === 404) {
-                this.messageText = "You have not linked your account before."
-                    this.message = true;
-                    setTimeout(() => {
-                        this.message = false;
-                        this.messageText = null;
-                        this.usernameUpdate = null;
-                    }, 5000)
+                this.username = 'You have not yet linked your account to a Minecraft username.'
             } else if (apiResponse.code === 401) {
-                this.messageText = "Sorry, you are not authorized to do that."
+                this.messageText = 'Sorry, you are not authorized to do that. Please try logging in again <a href="/api/discord/login"> here. </a>'
                     this.message = true;
-                    setTimeout(() => {
-                        this.message = false;
-                        this.messageText = null;
-                        this.usernameUpdate = null;
-                    }, 3000)
+                    this.viewUpdate = false;
             } else {
                 this.username = `Your account is currently linked to: ${apiResponse.username}`;
             }
@@ -54,13 +44,9 @@ var accountUsername = {
                         this.usernameUpdate = null;
                     }, 3000)
                 } else if (apiResponse.code === 401) {
-                    this.messageText = "Sorry, you are not authorized to do that."
+                    this.messageText = 'Sorry, you are not authorized to do that. Please try logging in again <a href="/api/discord/login"> here. </a>'
                     this.message = true;
-                    setTimeout(() => {
-                        this.message = false;
-                        this.messageText = null;
-                        this.usernameUpdate = null;
-                    }, 3000)
+                    this.viewUpdate = false;
                 } else {
                     this.messageText = `Successfully updated your linked account to ${this.usernameUpdate}!`
                     this.message = true;

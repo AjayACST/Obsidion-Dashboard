@@ -4,6 +4,7 @@ const { catchAsync, encodeFormData } = require('../utils/utils');
 const sqlite = require('sqlite3');
 const SHA512 = require('crypto-js/sha512');
 const config = require('config-yml');
+const CryptoJS = require('crypto-js');
 
 const router = express.Router();
 
@@ -13,6 +14,7 @@ const CLIENT_ID = config.app.CLIENT_ID;
 const CLIENT_SECRET = config.app.CLIENT_SECRET;
 const redirect = config.app.redirect;
 const sqlpath = config.sql;
+const bot_token = config.app.bot_token
 
 
 const db = new sqlite.Database(sqlpath);
@@ -59,9 +61,11 @@ router.get('/callback', catchAsync(async (req, res) => {
       httpOnly: false
     });
 
+
     //generate a MD5 hash for use with database API and store in cookies and DB
     var dbToken = SHA512(json.access_token);
     res.cookie('dbToken', `${dbToken}`, {
+      maxAge: 604800000,
       httpOnly: false
     });
 

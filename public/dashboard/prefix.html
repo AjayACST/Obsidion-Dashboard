@@ -11,7 +11,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #1F1A2B;">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #1F1A2B;">
             <a class="navbar-brand minecraft-font" href="https://obsidion-dev.com/" style="color: white; font-size: 25px;">Obsidion</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -39,23 +39,20 @@
             
               <span class="navbar-text" style="color: white;">
                 <div id="header">
-                  <a href="/dashboard/choose-server.html" style="color: white; font-size: 20px;  padding-right: 100px;" class="minecraft-font">Currnetly editing server "{{ guildName }}"</a>
+                  <a href="/dashboard/choose-server.html" style="color: white; font-size: 20px;  padding-right: 100px;" class="minecraft-font">Currnetly editing server "{{ guildName }}" <img style="max-width: auto; max-height: 50px; vertical-align: -60%; border-radius: 50%;" v-bind:src="guildIcon"></a>
                   <a href="/dashboard" style="color: white; font-size: 20px;" class="minecraft-font">{{ username }}<img style="max-width: auto; max-height: 50px; vertical-align: -60%; border-radius: 50%;" v-bind:src="imgURL"></a>
                 </div>
               </span>
             </div>
           </nav>
           <br>
-          <br>
-          <br>
-          <br>
           <div id="prefix">
             <div v-if="message" class="alert alert-primary" role="alert">
               <p v-html="messageText"></p>
             </div>
-            <h1 v-if="viewUpdate">{{ prefix }}</h1>
+            <h1 v-if="viewUpdate" class="minecraft-font white">{{ prefix }}</h1>
             <input v-if="viewUpdate" type="text" id="username" name="username" v-model="prefixUpdate">
-            <button v-if="viewUpdate" @click="updatePrefix">Update</button>
+            <button v-if="viewUpdate" @click="updatePrefix" class="btn btn-primary btn-color-2">Update</button>
           </div>
 
         <script src="https://unpkg.com/vue@3.0.2/dist/vue.global.js"></script>

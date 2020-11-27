@@ -67,8 +67,7 @@ const cookies = new UniversalCookie();
                   }
               },
               mounted() {
-                  console.log(cookies.get('error'))
-                if(cookies.get('error')) {
+                    if(cookies.get('error')) {
                     this.error = cookies.get('error');
                     this.errorView = true;
                 }

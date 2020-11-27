@@ -46,33 +46,49 @@ var guildPrefix = {
         })
     },
     methods: {
+        
         updatePrefix() {
-            fetch(`/api/database/prefixUpdate?token=${cookies.get('dbToken')}&guildid=${cookies.get('guildID')}&prefix=${this.prefixUpdate}&userid=${cookies.get('userID')}`, {
-                method: 'GET'
-            }).then(response => response.json()).then((apiResponse) => {
-                if (apiResponse.code === 404){
-                    this.messageText = "Sorry, an error has occured please try again later."
-                    this.message = true;
-                    setTimeout(() => {
-                        this.message = false;
-                        this.messageText = null;
-                        this.usernameUpdate = null;
-                    }, 3000)
-                } else if (apiResponse.code === 401) {
-                    this.messageText = 'Sorry, you are not authorized to do that. Please try logging in again <a href="/api/discord/login"> here. </a>'
-                    this.message = true;
-                    this.viewUpdate = false;
-                } else {
-                    this.messageText = `Successfully updated your prefix to "${this.prefixUpdate}"!`
-                    this.message = true;
-                    this.prefix = `Your prefix is currently set to: "${this.prefixUpdate}"`;
-                    setTimeout(() => {
-                        this.message = false;
-                        this.messageText = null;
-                        this.prefixUpdate = null;
-                    }, 3000)
-                }
-            });
+            if (this.prefixUpdate === null) {
+                this.messageText = 'The new prefix cannot be empty!';
+                this.message = true;
+                setTimeout(() => {
+                    this.message = false;
+                    this.messageText = null;
+                    this.prefixUpdate = null;
+                    return;
+                }, 3000)
+            } else {
+                fetch(`/api/database/prefixUpdate?token=${cookies.get('dbToken')}&guildid=${cookies.get('guildID')}&prefix=${this.prefixUpdate}&userid=${cookies.get('userID')}`, {
+                    method: 'GET'
+                }).then(response => response.json()).then((apiResponse) => {
+                    if (apiResponse.code === 404){
+                        this.messageText = "Sorry, an error has occured please try again later."
+                        this.message = true;
+                        setTimeout(() => {
+                            this.message = false;
+                            this.messageText = null;
+                            this.usernameUpdate = null;
+                        }, 3000)
+                    } else if (apiResponse.code === 401) {
+                        this.messageText = 'Sorry, you are not authorized to do that. Please try logging in again <a href="/api/discord/login"> here. </a>'
+                        this.message = true;
+                        this.viewUpdate = false;
+                    } else {
+                        if (this.prefixUpdate === null) {
+                            this.messageText = 'The new prefix cannot be empty!'
+                        }
+                        this.messageText = `Successfully updated your prefix to "${this.prefixUpdate}"!`
+                        this.message = true;
+                        this.prefix = `Your prefix is currently set to: "${this.prefixUpdate}"`;
+                        setTimeout(() => {
+                            this.message = false;
+                            this.messageText = null;
+                            this.prefixUpdate = null;
+                        }, 3000)
+                    }
+                });
+            }
+            
         }
     }
 }
@@ -84,7 +100,8 @@ const header = {
         return {
             username: cookies.get('username'),
             imgURL: cookies.get('imgurl'),
-            guildName: cookies.get('guildName')
+            guildName: cookies.get('guildName'),
+            guildIcon: cookies.get('guildIcon')
         }
     }
 };

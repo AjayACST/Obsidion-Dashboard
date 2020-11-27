@@ -10,7 +10,7 @@
         <link rel="stylesheet" type="text/css" href="../css/main.css">
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #1F1A2B;">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #1F1A2B;">
             <a class="navbar-brand minecraft-font" href="https://obsidion-dev.com/" style="color: white; font-size: 25px;">Obsidion</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -36,14 +36,20 @@
             
               <span class="navbar-text" style="color: white;">
                 <div id="header">
-                  <a href="/dashboard" style="color: white; font-size: 20px;" class="minecraft-font">{{ username }}<img style="max-width: auto; max-height: 50px; vertical-align: -60%; border-radius: 50%;" v-bind:src="imgURL"></a>
+                  <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <a href="/dashboard" style="color: white; font-size: 20px;" class="minecraft-font">{{ username }}<img style="max-width: auto; max-height: 50px; vertical-align: -60%; border-radius: 50%;" v-bind:src="imgURL"></a>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" href="#">Action</a>
+                      <a class="dropdown-item" href="#">Another action</a>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                  </div>
                 </div>
               </span>
             </div>
           </nav>
-          <br>
-          <br>
-          <br>
           <br>
 
         <script src="https://unpkg.com/vue@3.0.2/dist/vue.global.js"></script>

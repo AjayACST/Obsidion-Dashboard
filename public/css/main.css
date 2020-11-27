@@ -7,10 +7,79 @@
 
 }
 
+.white {
+    color: white!important;
+}
+
 .minecraft-font {
     font-family: minecraftregular;
 }
 
 .navbar-color {
     color: white !important;
+}
+
+body {
+    background-color: #3D3354;
+}
+
+.btn-color {
+    background-color: #3D3354;
+    border-color: #3D3354;
+}
+
+.btn-color:hover {
+    background-color: #3D3354;
+    border-color: #3D3354;
+}
+
+.btn-color:active {
+    background-color: #3D3354 !important;
+    border-color: #3D3354 !important;
+}
+
+
+.choose-server-li {
+    background-color: #1F1A2B!important;
+    color: white;
+    max-width: 500px;
+    border: 1px solid #3D3354;
+}
+
+
+.li-button:hover i {
+    transform: scale(1.5);
+    transition: all 0.3s ease-in-out 0.1;
+}
+
+.black {
+    color: black!important;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-color-2 {
+    background-color: #1F1A2B;
+    border-color: #1F1A2B;
+}
+
+.btn-color-2:hover {
+    background-color: #1F1A2B;
+    border-color: #1F1A2B;
+}
+
+.btn-color-2:active {
+    background-color: #1F1A2B !important;
+    border-color: #1F1A2B !important;
+}
+
+.dropdown-menu {
+    background-color: #1F1A2B;
+}
+
+.dropdown-menu a {
+    color: white;
 }

@@ -8,9 +8,10 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
         <link rel="stylesheet" type="text/css" href="../css/main.css">
+        <script src="https://kit.fontawesome.com/d49fd7bce3.js" crossorigin="anonymous"></script>
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #1F1A2B;">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #1F1A2B;">
             <a class="navbar-brand minecraft-font" href="https://obsidion-dev.com/" style="color: white; font-size: 25px;">Obsidion</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -36,26 +37,31 @@
             
               <span class="navbar-text" style="color: white;">
                 <div id="header">
-                  <a href="/dashboard/choose-server.html" style="color: white; font-size: 20px;  padding-right: 100px;" class="minecraft-font">Currnetly editing server "{{ guildName }}"</a>
+                  <a href="/dashboard/choose-server.html" style="color: white; font-size: 20px;  padding-right: 100px;" class="minecraft-font">Currnetly editing server "{{ guildName }}" <img style="max-width: auto; max-height: 50px; vertical-align: -60%; border-radius: 50%;" v-bind:src="guildIcon"></a>
                   <a href="/dashboard" style="color: white; font-size: 20px;" class="minecraft-font">{{ username }}<img style="max-width: auto; max-height: 50px; vertical-align: -60%; border-radius: 50%;" v-bind:src="imgURL"></a>
                 </div>
               </span>
             </div>
           </nav>
           <br>
-          <br>
-          <br>
-          <br>
-          <div id="server">
-            <div v-if="message" class="alert alert-primary" role="alert">
-              {{ messageText }}
+          <div class="main-content"></div>
+            <div id="server">
+              
+              <div v-if="message" class="alert alert-primary black" role="alert">
+                {{ messageText }}
+              </div>
+              <div class="d-flex justify-content-center minecraft-font white"><h2>Choose a server from the list below.</h2></div>
+              <div class="center">
+                <br>
+                <ul class="list-group center">
+                  <li v-for="guild in guilds" class="list-group-item choose-server-li minecraft-font">
+                    <img style="max-width: auto; max-height: 50px; vertical-align: -60%; border-radius: 50%;" v-bind:src="guild.imageURL" alt="Discord Icon">
+                    {{ guild.text }}
+                    <button v-on:click="selectGuild(guild.value)" type="button" class="btn btn-primary li-button btn-color" style="margin-left: 20px;"><i class="fas fa-arrow-right"></i></button>
+                  </li>
+                </ul>
+              </div>
             </div>
-            <select v-model="server" v-model="test">
-              <option v-for="guild in guilds" :value="guild.value">
-                {{ guild.text }}
-              </option>
-            </select>
-            <button @click="selectGuild">Select</button>
           </div>
 
         <script src="https://unpkg.com/vue@3.0.2/dist/vue.global.js"></script>

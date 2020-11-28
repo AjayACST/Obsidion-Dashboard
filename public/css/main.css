@@ -7,6 +7,8 @@
 
 }
 
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css');
+
 .white {
     color: white!important;
 }
@@ -81,5 +83,147 @@ body {
 }
 
 .dropdown-menu a {
+    color: white !important;
+}
+
+.dropdown-menu a:hover {
+    color: white !important;
+    background-color: #3D3354;
+}
+
+.btn-custom-animate {
+    text-align: center;
+    display: inline-block;
+    position: relative;
+    text-decoration: none;
+    color: #fff;
+    text-transform: capitalize;
+    /* background-color: - add your own background-color */
+    font-family: 'minecraftregular', sans-serif;
+    /* put your font-family */
+    font-size: 18px;
+    padding: 10px 0px;
+    width: 150px;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+/* effect-2 styles */
+.btn-custom-animate.btn-animate {
+    -webkit-transition: all 0.2s linear 0s;
+    transition: all 0.2s linear 0s;
+  }
+
+.btn-custom-animate.btn-animate:before {
+    content: "⇾";
+    font-family: FontAwesome;
+    font-size: 40px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    position: absolute;
+    top: 0;
+    right: -40px;
+    width: 40px;
+    height: 100%;
+    background-color: #3D3354;
+    border-radius: 0px 6px 6px 0px;
+    -webkit-transition: all 0.2s linear 0s;
+    transition: all 0.2s linear 0s;
+    text-align: center;
+}
+
+.btn-custom-animate.btn-animate:hover {
+    text-indent: -30px;
+}
+.btn-custom-animate.btn-animate:hover:before {
+    right: 0;
+    text-indent: 0px;
+}
+
+.form {
+    width: 30%;
+    position: relative;
+    height: 65px;
+    overflow: hidden;
+  }
+  
+  .form input {
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    padding-top: 20px;
+    border: none;
+    background-color: #3D3354;
+  }
+  .form label {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    border-bottom: 1px solid white;
+  }
+  .form label::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    border-bottom: 3px solid #1F1A2B;
+    transform: translateX(-100%);
+    transition: all 0.3s ease;
+  }
+  
+  .content-name {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    padding-bottom: 5px;
+    transition: all 0.3s ease;
     color: white;
+    font-family: 'minecraftregular';
+  }
+  .form input:focus {
+    outline: none;
+  }
+  .form input:focus + .label-name .content-name,
+  .form input:valid + .label-name .content-name {
+    transform: translateY(-100%);
+    font-size: 16px;
+    left: 0px;
+    color: white;
+  }
+  .form input:focus + .label-name::after,
+  .form input:valid + .label-name::after {
+    transform: translateX(0%);
+  }
+  
+
+.btn-nav-color {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+}
+
+.btn-nav-color:focus {
+    background-color: rgba(0, 0, 0, 0) !important;
+    border: none !important;
+}
+
+.btn-nav-color:active {
+    background-color: rgba(0, 0, 0, 0) !important;
+    border: none !important;
+}
+
+.btn-nav-color:hover {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
 }

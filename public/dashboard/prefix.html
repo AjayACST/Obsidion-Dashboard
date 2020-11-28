@@ -9,6 +9,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
         <link rel="stylesheet" type="text/css" href="../css/main.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #1F1A2B;">
@@ -39,21 +40,46 @@
             
               <span class="navbar-text" style="color: white;">
                 <div id="header">
-                  <a href="/dashboard/choose-server.html" style="color: white; font-size: 20px;  padding-right: 100px;" class="minecraft-font">Currnetly editing server "{{ guildName }}" <img style="max-width: auto; max-height: 50px; vertical-align: -60%; border-radius: 50%;" v-bind:src="guildIcon"></a>
-                  <a href="/dashboard" style="color: white; font-size: 20px;" class="minecraft-font">{{ username }}<img style="max-width: auto; max-height: 50px; vertical-align: -60%; border-radius: 50%;" v-bind:src="imgURL"></a>
+                  <a class="dropdown-item" href="/dashboard/choose-server.html" class="minecraft-font">Currnetly editing server "{{ guildName }}" <img style="max-width: auto; max-height: 50px; vertical-align: -60%; border-radius: 50%;" v-bind:src="guildIcon"></a>
+                  <div class="dropdown">
+                    
+                    <button class="btn btn-secondary dropdown-toggle btn-nav-color" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <a href="/dashboard" style="color: white; font-size: 20px;" class="minecraft-font">{{ username }}<img style="max-width: auto; max-height: 50px; vertical-align: -60%; border-radius: 50%;" v-bind:src="imgURL"></a>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      
+                      <a class="dropdown-item" href="/api/discord/logout">Logout</a>
+                    </div>
+                  </div>
                 </div>
               </span>
             </div>
           </nav>
           <br>
-          <div id="prefix">
-            <div v-if="message" class="alert alert-primary" role="alert">
-              <p v-html="messageText"></p>
+          <div id="prefix" class="container">
+            <div class="row">
+              <div class="col">
+                <div v-if="message" class="alert alert-primary" role="alert">
+                  <p v-html="messageText"></p>
+                </div>
+                <h1 v-if="viewUpdate" class="minecraft-font white d-flex justify-content-center">{{ prefix }}</h1>
+              </div>
             </div>
-            <h1 v-if="viewUpdate" class="minecraft-font white">{{ prefix }}</h1>
-            <input v-if="viewUpdate" type="text" id="username" name="username" v-model="prefixUpdate">
-            <button v-if="viewUpdate" @click="updatePrefix" class="btn btn-primary btn-color-2">Update</button>
+            <div class="row">
+              <div class="col d-flex justify-content-center">
+                <div class="form">
+                  <input v-if="viewUpdate" type="text" name="username" id="username" autocomplete="off" v-model="prefixUpdate" required />
+                  <label for="username" class="label-name">
+                    <span class="content-name">
+                      Custom Prefix Here
+                    </span>
+                  </label>
+                </div>
+                <button v-if="viewUpdate" @click="updatePrefix" class="btn btn-primary btn-color-2 btn-custom-animate btn-animate" style="margin-left: 20px;"><span>Update</span></button>
+              </div>
+            </div>
           </div>
+          
 
         <script src="https://unpkg.com/vue@3.0.2/dist/vue.global.js"></script>
         <script src="../js/prefix.js"></script>

@@ -14,7 +14,8 @@ const CLIENT_ID = config.app.CLIENT_ID;
 const CLIENT_SECRET = config.app.CLIENT_SECRET;
 const redirect = config.app.redirect;
 const sqlpath = config.sql;
-const bot_token = config.app.bot_token
+const baseURL = config.app.baseURL
+
 
 
 const db = new sqlite.Database(sqlpath);
@@ -73,5 +74,21 @@ router.get('/callback', catchAsync(async (req, res) => {
 
     res.redirect("/");
   }));
+
+router.get('/logout', (req, res) => {
+  res.clearCookie('botToken');
+  res.clearCookie('dbToken');
+  res.clearCookie('error');
+  res.clearCookie('guildIcon');
+  res.clearCookie('guildID');
+  res.clearCookie('guildName');
+  res.clearCookie('imgurl');
+  res.clearCookie('isAdmin');
+  res.clearCookie('loggedin')
+  res.clearCookie('token');
+  res.clearCookie('userID');
+  res.clearCookie('username')
+  res.redirect(baseURL);
+});
 
 module.exports = router;

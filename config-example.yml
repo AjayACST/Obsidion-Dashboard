@@ -1,8 +1,9 @@
 app:
   CLIENT_ID: "App Client ID"
   CLIENT_SECRET: "App Client Secret"
-  redirect: "http://localhost:50451/api/discord/callback"
+  redirect: "http://localhost:5000/api/discord/callback"
   bot_token: "your discord bot token"
+  baseURL: "http://localhost:5000/"
 
 db:
   user: "discord"

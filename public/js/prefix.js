@@ -35,7 +35,7 @@ var guildPrefix = {
         }).then(response => response.json()).then((apiResponse) => {
             console.log(apiResponse)
             if (apiResponse.code === 404) {
-                this.prefix = "You do not currently have a custom prefix set on that server!"
+                this.prefix = "You do not currently have a custom prefix set on that server! You can set one below."
             } else if (apiResponse.code === 401) {
                 this.messageText = 'Sorry, you are not authorized to do that. Please try logging in again <a href="/api/discord/login"> here. </a>'
                 this.message = true;

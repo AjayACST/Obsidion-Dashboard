@@ -46,32 +46,32 @@
             </div>
           </nav>
           <br>
-          <div id="prefix" class="container">
+          <div id="server" class="container">
             <div class="row">
               <div class="col">
                 <div v-if="message" class="alert alert-primary" role="alert">
                   <p v-html="messageText"></p>
                 </div>
-                <h1 v-if="viewUpdate" class="minecraft-font white d-flex justify-content-center">{{ prefix }}</h1>
+                <h1 v-if="viewUpdate" class="minecraft-font white d-flex justify-content-center">{{ server }}</h1>
               </div>
             </div>
             <div class="row">
               <div class="col d-flex justify-content-center">
                 <div class="form">
-                  <input v-if="viewUpdate" type="text" name="username" id="username" autocomplete="off" v-model="prefixUpdate" required />
-                  <label for="username" class="label-name">
+                  <input v-if="viewUpdate" type="text" name="username" id="server" autocomplete="off" v-model="serverUpdate" required />
+                  <label for="server" class="label-name">
                     <span class="content-name">
-                      Custom Prefix Here
+                      Server to link to.
                     </span>
                   </label>
                 </div>
-                <button v-if="viewUpdate" @click="updatePrefix" class="btn btn-primary btn-color-2 btn-custom-animate btn-animate" style="margin-left: 20px;"><span>Update</span></button>
+                <button v-if="viewUpdate" @click="updateServer" class="btn btn-primary btn-color-2 btn-custom-animate btn-animate" style="margin-left: 20px;"><span>Update</span></button>
               </div>
             </div>
           </div>
           
 
         <script src="https://unpkg.com/vue@3.0.2/dist/vue.global.js"></script>
-        <script src="../js/prefix.js"></script>
+        <script src="../js/server.js"></script>
     </body>
 </html>

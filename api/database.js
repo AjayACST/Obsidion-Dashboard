@@ -52,7 +52,7 @@ router.get('/account', (req, res) => {
         if (rows[0].token === token) {
             pool.query(`SELECT username FROM discord_user WHERE id='${id}'`)
             .then(response => res.json({code: 200, "username": response.rows[0].username}))
-            .catch(e => console.error(e))
+            .catch(e => res.json({code: 404, message: "That user has not linked an account."}))
         } else {
             res.json({code: 401, "message": "That is not a valid token."})
         }
@@ -160,6 +160,8 @@ router.get('/prefix', (req, res) => {
             .then(response => {
                 if (!response.rows[0]) {
                     return res.json({code: 404, "message": "User has not setup a custom prefix."})
+                } else if (response.rows[0].prefix === null) {
+                    return res.json({code: 404, "message": "User has not setup a custom prefix."})
                 } else {
                     return res.json({code: 200, "prefix": response.rows[0].prefix})
                 }
@@ -215,6 +217,86 @@ router.get('/prefixUpdate', (req, res) => {
                         var prefixUpdate = `["<@!${userid}>", "<@${userid}>", "${prefix}"]`
                         client.set(key, prefixUpdate, 'EX', 28800, redis.print);
                         client.quit();
+                        return res.json({code: 200, "message": "Successfully updated linked prefix for guild."})
+                    })
+                    .catch(e => console.error(e))
+                }
+            })
+        } else {
+            res.json({code: 401, "message": "That is not a valid token."})
+        }
+
+    });
+})
+
+
+router.get('/server', (req, res) => {
+    if (!req.query.token) throw new Error('NoTokenProvided');
+    if (!req.query.guildid) throw new Error('NoGuildIDProvided');
+    const token = req.query.token;
+    const guildid = req.query.guildid;
+
+    var sql = `SELECT token FROM auth WHERE token='${token}'`;
+
+    db.all(sql, [], (err, rows) => {
+        if (err) {
+            throw new Error("ErrorWithDatabase");
+        }
+
+        if (rows.length === 0) {
+            res.json({code: 401, "message": "That is not a valid token."})
+        }
+
+        if (rows[0].token === token) {
+            pool.query(`SELECT server FROM guild WHERE id='${guildid}'`)
+            .then(response => {
+                if (!response.rows[0]) {
+                    return res.json({code: 404, "message": "User has not linked a server to that guild"})
+                } else if (response.rows[0].server === null) {
+                    return res.json({code: 404, "message": "User has not linked a server to that guild"})
+                } else {
+                    return res.json({code: 200, "server": response.rows[0].server})
+                }
+            })
+            .catch(e => console.error(e))
+        } else {
+            res.json({code: 401, "message": "That is not a valid token."})
+        }
+
+    });
+})
+
+router.get('/serverUpdate', (req, res) => {
+    if (!req.query.token) throw new Error('NoTokenProvided');
+    if (!req.query.guildid) throw new Error('NoGuildIDProvided');
+    if (!req.query.server) throw new Error('NoPrefixProvided');
+    const token = req.query.token;
+    const guildid = req.query.guildid;
+    const server = req.query.server;
+
+    var sql = `SELECT token FROM auth WHERE token='${token}'`;
+
+    db.all(sql, [], (err, rows) => {
+        if (err) {
+            throw new Error("ErrorWithDatabase");
+        }
+
+        if (rows.length === 0) {
+            res.json({code: 401, "message": "That is not a valid token."})
+        }
+
+        if (rows[0].token === token) {
+            pool.query(`SELECT prefix FROM guild WHERE id='${guildid}'`)
+            .then((response) => {
+                if (response.rows[0]) {
+                    pool.query(`UPDATE guild SET server = '${server}' WHERE id='${guildid}'`)
+                    .then((response) => {
+                        return res.json({code: 200, "message": "Successfully updated linked prefix for guild."})
+                    })
+                    .catch(e => res.json({code: 404, "message": "An error has occurred please try again later."}))
+                } else {
+                    pool.query(`INSERT INTO guild (id, server) VALUES ('${guildid}', '${server}')`)
+                    .then((response) => {
                         return res.json({code: 200, "message": "Successfully updated linked prefix for guild."})
                     })
                     .catch(e => console.error(e))

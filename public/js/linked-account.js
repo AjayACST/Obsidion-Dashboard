@@ -32,32 +32,44 @@ var accountUsername = {
     },
     methods: {
         updateUsername() {
-            fetch(`/api/database/accountUpdate?token=${cookies.get('dbToken')}&id=${cookies.get('userID')}&username=${this.usernameUpdate}`, {
-                method: 'GET'
-            }).then(response => response.json()).then((apiResponse) => {
-                if (apiResponse.code === 404){
-                    this.messageText = "Sorry, an error has occured please try again later."
-                    this.message = true;
-                    setTimeout(() => {
-                        this.message = false;
-                        this.messageText = null;
-                        this.usernameUpdate = null;
-                    }, 3000)
-                } else if (apiResponse.code === 401) {
-                    this.messageText = 'Sorry, you are not authorized to do that. Please try logging in again <a href="/api/discord/login"> here. </a>'
-                    this.message = true;
-                    this.viewUpdate = false;
-                } else {
-                    this.messageText = `Successfully updated your linked account to ${this.usernameUpdate}!`
-                    this.message = true;
-                    this.username = `Your account is currently linked to: ${this.usernameUpdate}`;
-                    setTimeout(() => {
-                        this.message = false;
-                        this.messageText = null;
-                        this.usernameUpdate = null;
-                    }, 3000)
-                }
-            });
+            if (this.usernameUpdate === null) {
+                this.messageText = 'The username cannot be empty!';
+                this.message = true;
+                setTimeout(() => {
+                    this.message = false;
+                    this.messageText = null;
+                    this.usernameUpdate = null;
+                    return;
+                }, 3000)
+            } else {
+                fetch(`/api/database/accountUpdate?token=${cookies.get('dbToken')}&id=${cookies.get('userID')}&username=${this.usernameUpdate}`, {
+                    method: 'GET'
+                }).then(response => response.json()).then((apiResponse) => {
+                    if (apiResponse.code === 404){
+                        this.messageText = "Sorry, an error has occured please try again later."
+                        this.message = true;
+                        setTimeout(() => {
+                            this.message = false;
+                            this.messageText = null;
+                            this.usernameUpdate = null;
+                        }, 3000)
+                    } else if (apiResponse.code === 401) {
+                        this.messageText = 'Sorry, you are not authorized to do that. Please try logging in again <a href="/api/discord/login"> here. </a>'
+                        this.message = true;
+                        this.viewUpdate = false;
+                    } else {
+                        this.messageText = `Successfully updated your linked account to ${this.usernameUpdate}!`
+                        this.message = true;
+                        this.username = `Your account is currently linked to: ${this.usernameUpdate}`;
+                        setTimeout(() => {
+                            this.message = false;
+                            this.messageText = null;
+                            this.usernameUpdate = null;
+                        }, 3000)
+                    }
+                });
+            }
+            
         }
     }
 }

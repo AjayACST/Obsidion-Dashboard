@@ -49,15 +49,13 @@ router.get('/account', (req, res) => {
             res.json({code: 401, "message": "That is not a valid token."})
         }
 
-        rows.forEach((row) => {
-            if (row.token === token) {
-                pool.query(`SELECT username FROM discord_user WHERE id='${id}'`)
-                .then(response => res.json({code: 200, "username": response.rows[0].username}))
-                .catch(e => console.error(e))
-            } else {
-                res.json({code: 401, "message": "That is not a valid token."})
-            }
-        })
+        if (rows[0].token === token) {
+            pool.query(`SELECT username FROM discord_user WHERE id='${id}'`)
+            .then(response => res.json({code: 200, "username": response.rows[0].username}))
+            .catch(e => console.error(e))
+        } else {
+            res.json({code: 401, "message": "That is not a valid token."})
+        }
 
     });
 })
@@ -81,7 +79,7 @@ router.get('/accountUpdate', (req, res) => {
             res.json({code: 401, "message": "That is not a valid token."})
         }
         
-        if (row.token === token) {
+        if (rows[0].token === token) {
             pool.query(`SELECT username FROM discord_user WHERE id='${id}'`)
             .then((response) => {
                 if (response.rows[0]) {
@@ -119,7 +117,7 @@ router.get('/discordGuild', (req, res) => {
             res.json({code: 401, "message": "That is not a valid token."})
         }
 
-        if (rows.token === token) {
+        if (rows[0].token === token) {
             fetch(`https://discord.com/api/v6/guilds/${guildID}/members/${clientID}`, {
                 method: "GET",
                 headers: {
@@ -157,7 +155,7 @@ router.get('/prefix', (req, res) => {
             res.json({code: 401, "message": "That is not a valid token."})
         }
 
-        if (rows.token === token) {
+        if (rows[0].token === token) {
             pool.query(`SELECT prefix FROM guild WHERE id='${guildid}'`)
             .then(response => {
                 if (!response.rows[0]) {
@@ -195,7 +193,7 @@ router.get('/prefixUpdate', (req, res) => {
             res.json({code: 401, "message": "That is not a valid token."})
         }
 
-        if (row.token === token) {
+        if (rows[0].token === token) {
             pool.query(`SELECT prefix FROM guild WHERE id='${guildid}'`)
             .then((response) => {
                 if (response.rows[0]) {

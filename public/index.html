@@ -10,8 +10,8 @@
         <link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
     </head>
     <body>
-      <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: #1F1A2B;">
-        <a class="navbar-brand minecraft-font" href="https://obsidion-dev.com/" style="color: white; font-size: 25px;">Obsidion</a>
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: white;">
+        <a class="navbar-brand b612-font" href="https://obsidion-dev.com/" style="color: white; font-size: 25px;">Obsidion</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -22,34 +22,47 @@
             </li>
           </ul>
         
-          <span class="navbar-text" style="color: white;">
+          <span class="navbar-text" style="color: black;">
             <div id="discord-login">
               <span v-if="notlogin">
-                <a href="/api/discord/login" style="color: white; font-size: 20px;" class="minecraft-font">Login with<img style="max-width: auto; max-height: 30px; vertical-align: -25%" src="/img/Discord-Wordmark-Color.png"></a>
+                <a href="/api/discord/login" style="color: black; font-size: 20px;" class="minecraft-font">Login with<img style="max-width: auto; max-height: 30px; vertical-align: -25%" src="/img/Discord-Wordmark-Color.png"></a>
               </span>
             </div>
             <div id="header">
               <span v-if="loggedin">
-                <a href="/dashboard" style="color: white; font-size: 20px;" class="minecraft-font">{{ username }} <img style="max-width: auto; max-height: 50px; vertical-align: -60%; border-radius: 50%;" v-bind:src="imgURL"></a>
+                <a href="/dashboard" style="color: black; font-size: 20px;" class="minecraft-font">{{ username }} <img style="max-width: auto; max-height: 50px; vertical-align: -60%; border-radius: 50%;" v-bind:src="imgURL"></a>
               </span>
             </div>
           </span>
         </div>
       </nav>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <div id="error">
+      
+
+      <div id="particles-js"><div id="error">
         <span v-if="errorView">
           <div class="alert alert-danger" role="alert">
             {{ error }}
           </div>
         </span>
       </div>
+      
+    </div>
+    <div class="d-flex justify-content-center">
+      <div class="vertical-center">
+        <div id="blurred-box">
+          <div class="content-main">
+            <img src="img/profile.png"
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    
         
         <script src="https://unpkg.com/vue@3.0.2/dist/vue.global.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+        <script src="js/particle.js"></script>
         <script src="js/index.js"></script>
     </body>
 </html>

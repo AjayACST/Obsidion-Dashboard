@@ -10,6 +10,8 @@
       <link rel="stylesheet" type="text/css" href="/css/main.css">
       <link rel="shortcut icon" type="image/png" href="img/favicon.png"/>
       <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+      <script src="https://unpkg.com/vue@3.0.2/dist/vue.global.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     </head>
     <body>
       <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: white;">
@@ -67,19 +69,38 @@
           </span>
         </div>
 
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col d-flex justify-content-center">
-              <h1><b>Update Your Server Prefix</b></h1>
+        <div id="animate" class="container-fluid">
+          <div class="row" style="margin-top: 25px;">
+            <div class="col d-flex justify-content-start" style="padding-top: 100px;">
+              <p style="font-size: 30px;"><span class="title">Update Your Server Prefix</span><br>Quickly and easily update the prefix for any server you are an administrator on from our web dashboard</p>
             </div>
             <div class="col">
-              <img src="img/Prefix.png" height="457px">
+              <img src="img/Prefix.png" height="457px" style="margin-left: 100px;">
+            </div>
+          </div>
+          <div class="row" style="margin-top: 25px;">
+            <div class="col">
+              <img src="img/Serverlink.png" height="457px">
+            </div>
+            <div class="col d-flex justify-content-end" style="padding-top: 100px;">
+              <p style="font-size: 30px;"><span class="title">Update Your Linked Server</span><br>Easily and quickly change which Minecraft server your Discord server is linked to from our web dashboard.</p>
+            </div>
+          </div>
+          <div class="row" style="margin-top: 25px; margin-bottom: 25px;">
+            <div class="col d-flex justify-content-start" style="padding-top: 100px;">
+              <p style="font-size: 30px;"><span class="title">Update Your Linked Profile</span><br>Quickly and easily update the Minecraft username that your account is linked to from our web dashboard</p>
+            </div>
+            <div class="col">
+              <img src="img/Profile Img.png" height="457px" style="margin-left: 100px;">
             </div>
           </div>
         </div>
 
-        <script src="https://unpkg.com/vue@3.0.2/dist/vue.global.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+        <div class="footer-bar">
+          <div class="footer-content">
+            <h6 class="white">© 2020 Obsidion Dev. All rights reserved.<br>"Minecraft" is a trademark of Mojang AB. Obsidion Dev is not affiliated with Mojang or Minecraft</h6>
+          </div>
+        </div>
         <script src="js/particle.js"></script>
         <script src="js/index.js"></script>
     </body>
